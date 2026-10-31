@@ -3,14 +3,14 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowLeft,
-  Trash2,
   MapPin,
   Star,
   Calendar,
   Check,
   ArrowRight,
 } from "lucide-react";
-import EditDestinationDialog from "@/components/ui/EditDestinationDialog";
+import EditDestinationDialog from "@/components/destination/EditDestinationDialog";
+import DeleteDestinationDialog from "@/components/destination/DeleteDestinationDialog";
 
 interface Destination {
   _id?: string;
@@ -85,15 +85,12 @@ const DestinationDetailsPage = async ({ params }: PageProps) => {
 
           <div className="flex items-center gap-3">
             <EditDestinationDialog destination={destination} />
-            <button className="border border-red-300 text-red-500 rounded-md px-3.5 py-1.5 text-xs font-medium hover:bg-red-50 flex items-center gap-1.5 transition-colors cursor-pointer">
-              <Trash2 className="size-3.5" />
-              Cancel
-            </button>
+            <DeleteDestinationDialog id={id} />
           </div>
         </div>
 
         {/* Hero Image */}
-        <div className="relative aspect-[21/9] min-h-[260px] sm:min-h-[360px] md:min-h-[420px] w-full overflow-hidden rounded-md bg-slate-100">
+        <div className="relative aspect-21/9 min-h-65 sm:min-h-90 md:min-h-105 w-full overflow-hidden rounded-md bg-slate-100">
           <Image
             src={
               destination.imageUrl && destination.imageUrl.trim().length > 0

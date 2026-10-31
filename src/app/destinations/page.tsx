@@ -1,5 +1,5 @@
 import React from "react";
-import DestinationCard, { Destination } from "@/components/destination-card";
+import DestinationCard, { Destination } from "@/components/destination/destination-card";
 import {
   Select,
   SelectContent,

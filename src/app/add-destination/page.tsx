@@ -75,6 +75,10 @@ export default function AddDestinationPage() {
 
       const data = await res.json();
       console.log("Success:", data);
+
+      // Redirect to destinations page
+      router.push("/destinations");
+      router.refresh();
     } catch (error) {
       console.error("Submission failed:", error);
     }
