@@ -9,10 +9,18 @@ import {
 } from "@/components/ui/select";
 
 export default async function AllDestinationPage() {
-  const res = await fetch("http://localhost:8000/destinations", {
-    cache: "no-store",
-  });
-  const destinations: Destination[] = await res.json();
+  let destinations: Destination[] = [];
+
+  try {
+    const res = await fetch("http://localhost:8000/destinations", {
+      cache: "no-store",
+    });
+    if (res.ok) {
+      destinations = await res.json();
+    }
+  } catch (error) {
+    console.error("Failed to fetch destinations:", error);
+  }
 
   return (
     <main className="bg-white min-h-screen py-10 md:py-16 px-6 sm:px-10 md:px-16">

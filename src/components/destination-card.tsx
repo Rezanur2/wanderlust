@@ -10,13 +10,15 @@ export interface Destination {
   country: string;
   price: number | string;
   duration: string;
-  imageUrl: string;
+  imageUrl?: string;
   rating?: number | string;
 }
 
 interface DestinationCardProps {
   destination: Destination;
 }
+
+const DEFAULT_IMAGE = "/images/Banner.png";
 
 export default function DestinationCard({ destination }: DestinationCardProps) {
   const {
@@ -30,13 +32,17 @@ export default function DestinationCard({ destination }: DestinationCardProps) {
     rating = "4.5",
   } = destination;
 
+  const cardId = _id || id;
+  const imageSrc =
+    imageUrl && imageUrl.trim().length > 0 ? imageUrl : DEFAULT_IMAGE;
+
   return (
     <div className="group flex flex-col bg-white overflow-hidden">
       {/* Image & Rating Badge */}
       <div className="relative aspect-16/10 w-full overflow-hidden bg-slate-100">
         <Image
-          src={imageUrl}
-          alt={destinationName}
+          src={imageSrc}
+          alt={destinationName || "Destination"}
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           className="object-cover transition-transform duration-500 group-hover:scale-105"
@@ -79,7 +85,7 @@ export default function DestinationCard({ destination }: DestinationCardProps) {
         {/* Book Now Link */}
         <div className="pt-1">
           <Link
-            href={`/destinations/${_id || id}`}
+            href={`/destinations/${cardId}`}
             className="inline-flex items-center gap-1 text-[#0BBCD6] hover:text-[#09a8c0] text-xs font-bold tracking-wider uppercase transition-colors"
           >
             Book Now
